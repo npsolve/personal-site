@@ -18,7 +18,6 @@ const ProjectsPageInner = props => {
 
     return (
       <div>
-        <h1>Projects</h1>
         {personalProjects.length > 0 && (
           <ProjectListingSection
             projects={personalProjects}
