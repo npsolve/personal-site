@@ -30,7 +30,7 @@ const GlobalStyle = createGlobalStyle`
   }
 
   iframe {
-    margin: 0 auto;
+    margin: 1.5rem;
     display: block;
     max-width: 100%;
     width: 100%;
@@ -162,7 +162,7 @@ const GlobalStyle = createGlobalStyle`
     @media (min-width: 520px) {
       margin-top: 2em;
       margin-bottom: 2em;
-      width: 80%;
+      width: 90%;
     }
   }
 
@@ -181,7 +181,7 @@ const GlobalStyle = createGlobalStyle`
     }
 
     ul {
-      margin-left: 1.5rem;
+      margin: 0 0 1.5rem 1.5rem;
 
       @media (min-width: 520px) {
         margin-left: 2.5rem;
@@ -189,7 +189,7 @@ const GlobalStyle = createGlobalStyle`
     }
 
     li {
-      margin: 0.5rem 0;
+      margin: 1rem 0;
       line-height: 1.6rem;
 
       p {
