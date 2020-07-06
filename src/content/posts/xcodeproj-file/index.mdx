@@ -1,0 +1,124 @@
+---
+title: 'Whats up with Xcodeproj file!'
+date: '2016-10-18'
+excerpt: 'Basic findings and semantics of Xcodeproj file'
+publish: false
+---
+
+import ZoomImage from 'components/ZoomImage';
+import XA from 'components/ExternalAnchor';
+
+import cmd from './cmd.png';
+import projectFile from './project-file.png';
+import target from './target.png';
+import workspace from './workspace.png';
+
+<section class="blog-section">
+
+I started developing iOS app again and I found myself struggling with all nitty-gritty aspects of Xcode environment. This will be a short guide to know things before you start the app development.
+
+I will be taking project **Falcon** as demo and the content of it can be seen in below snapshot.
+
+
+<div class="blog-inset">
+  <ZoomImage src={cmd} caption="Project files" />
+</div>
+
+A glossary of whole project in Xcode looks like this
+
+<div class="blog-inset">
+   <ZoomImage src={projectFile} caption="Project" />  
+</div>
+
+## Key Concepts
+
+**Targets**
+It specify in detail how a product/binary is built. They include build settings, such as compiler and linker flags, and they define which files (source code and resources) actually belong to a product. When you build/run, you always select one specific target.
+
+<div class="blog-inset">
+  <ZoomImage src={target} caption="Xcode target" />
+</div>
+
+In above figure you can see that we have three targets.
+- Falcon
+- FalconTests
+- FalconUITests
+
+All these three target will have different settings.
+
+**projects**
+Now, it is very likely that we will have multiple targets and they will share common resources. So we will need to group them these related target and that is what a project is. In above example Falcon is a project.
+
+**workspaces**
+Guess, what is workspaces then? Workspaces contain and manage projects. All the directly included projects are on the same level and their targets can depend on each other. So let suppose if I add a new project
+
+<div class="blog-inset">
+   <ZoomImage src={workspace} caption="Worskspace"/>  
+</div>
+
+## Takeaways
+- Most of the time project scope is sufficient.
+
+Now you can easily figure out why <XA href="http://www.cocoapods.org">CocoaPods</XA> uses `workspaces`. They manage third party libraries or projects for us. Moving on to Xcode files.
+
+## Xcode Files
+All the Xcode file **location** is with respect to the root folder of the project.
+****
+**.pbxproj**
+`Location`: {{your-app-name}}.xcodeproj/{{your-app-name}}.pbxproj
+
+PBXPROJ is an Xcode data file that saves all the project project data such as the list of source code, resource files, and build properties.
+
+> It is a critically important file.
+
+The biggest challenge comes when you are working in a team and fix the merge conflict arising due to distribute changes. Unfortunately, there's not much you can do except to make the changes manually.
+
+The Xcode team has put a lot of effort into making the file merge-friendly. In managing several large projects via SVN, I've generally found that the merges are automatic and painless.
+
+People have tried <XA href="https://gist.github.com/xslim/1790379">automating</XA> it but I wouldn't not recommend until you check manually whether it is working fine or not.
+
+**Should I add it to .gitignore?** NO
+****
+**.xcscheme**
+
+`Location`: {{your-app-name}}.xcodeproj/xcuserdata/{{computer-user-name}}.xcuserdatad/xcschemes/{{your-app-name}}.xcscheme
+
+Instead of just ignoring the scheme file, you can ignore whole folder
+```
+# Exclude personal Xcode user settings
+xcuserdata/
+```
+
+**Should I add it to .gitignore?** YES
+****
+**.xcworkspacedata**
+`Location`: {{your-app-name}}.xcworkspace/
+
+A workspace is XML document which contains data of projects groups and other documents so you can work on them together. It can contain any number of Xcode projects, plus any other files you want to include. In addition to organizing all the files in each Xcode project, a workspace provides implicit and explicit relationships among the included projects and their targets. For example. The Falcon project workspace file looks like this.
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<Workspace
+   version = "1.0">
+   <FileRef
+      location = "group:Falcon.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:Pods/Pods.xcodeproj">
+   </FileRef>
+</Workspace>
+```
+
+From above, it can inferred that workspace is trying to keep the reference for Falcon and Pods projects.
+
+**Should I add it to .gitignore?** NO and YES if you are not using CocoaPods.
+
+At last I will recommend to go through the <XA href="https://developer.apple.com/library/content/featuredarticles/XcodeConcepts/Concept-Targets.html">official documentation</XA> to learn more about above files.
+
+Let me know if above content helped you!
+
+### References
+
+- <XA href="http://www.monobjc.net/xcode-project-file-format.html">xcode project file format</XA>.
+
+</section>
