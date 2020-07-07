@@ -18,12 +18,14 @@ const GlobalStyle = createGlobalStyle`
     font-size: 1.6rem;
     font-family: 'avenir' !important;
     word-break: break-word;
-    white-space: pre-line;
   }
 
   h1, h2, h3, h4, h5, h6 {
     font-family: 'menlo' monospace;
-    line-height: 2.5rem;
+  }
+
+  h1 {
+    line-height: 3.5rem;
   }
 
   *, *:before, *:after {
@@ -84,18 +86,17 @@ const GlobalStyle = createGlobalStyle`
   table {
     margin-bottom: 1rem;
     border-collapse: collapse;
-    width: 100%;
+    padding: 1rem;
     display: block;
     overflow-x: auto;
-    padding: 1rem;
+    width: 100%;
+    white-space: nowrap;
   }
   table tr {
     border-top: 1px solid black;
     background-color: white;
   }
-  table tr:nth-child(2n) {
-    background-color: lighten(black, 50%);
-  }
+  
   table tr th {
     font-weight: bold;
     border: 1px solid black;
@@ -108,12 +109,6 @@ const GlobalStyle = createGlobalStyle`
     text-align: left;
     margin: 0;
     padding: 6px 13px;
-  }
-  table tr th :first-child, table tr td :first-child {
-    margin: 0;
-  }
-  table tr th :last-child, table tr td :last-child {
-    margin: 0;
   }
 
   p {
