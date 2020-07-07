@@ -11,6 +11,7 @@ const GlobalStyle = createGlobalStyle`
   html {
     box-sizing: border-box;
     font-size: 62.5%;
+    line-height: 1.6rem;
   }
 
   body {
@@ -22,7 +23,7 @@ const GlobalStyle = createGlobalStyle`
 
   h1, h2, h3, h4, h5, h6 {
     font-family: 'menlo' monospace;
-    margin: 0.5rem 0;
+    line-height: 2.5rem;
   }
 
   *, *:before, *:after {
@@ -30,10 +31,10 @@ const GlobalStyle = createGlobalStyle`
   }
 
   iframe {
-    margin: 1.5rem;
     display: block;
     max-width: 100%;
     width: 100%;
+    margin: 0 0 2rem 0;
 
     &.youtube {
       height: 20rem;
@@ -117,7 +118,6 @@ const GlobalStyle = createGlobalStyle`
 
   p {
     margin: 0 0 2rem 0;
-    line-height: 2.6rem;
     font-size: 1.8rem;
   }
 
@@ -190,8 +190,6 @@ const GlobalStyle = createGlobalStyle`
 
     li {
       margin: 1rem 0;
-      line-height: 1.6rem;
-
       p {
         margin: 0;
       }

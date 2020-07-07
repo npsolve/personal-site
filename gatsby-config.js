@@ -5,9 +5,6 @@ module.exports = {
   siteMetadata: metaConfig,
   plugins: [
     {
-      resolve: 'gatsby-plugin-styled-components'
-    },
-    {
       resolve: 'gatsby-source-filesystem',
       options: {
         name: 'pages',
@@ -18,14 +15,14 @@ module.exports = {
       resolve: 'gatsby-source-filesystem',
       options: {
         name: 'posts',
-        path: `${__dirname}/src/content/posts`
+        path: `${__dirname}/content/posts`
       }
     },
     {
       resolve: 'gatsby-source-filesystem',
       options: {
         name: 'projects',
-        path: `${__dirname}/src/content/projects`
+        path: `${__dirname}/content/projects`
       }
     },
     {
@@ -107,6 +104,7 @@ module.exports = {
       }
     },
 
+    'gatsby-plugin-styled-components',
     'gatsby-plugin-react-helmet',
     'gatsby-transformer-sharp',
     `gatsby-plugin-sharp`,
