@@ -5,6 +5,19 @@ module.exports = {
   siteMetadata: metaConfig,
   plugins: [
     {
+      resolve: `gatsby-plugin-manifest`,
+      options: {
+        name: metaConfig.title,
+        short_name: metaConfig.author,
+        start_url: "/",
+        background_color: "#6b37bf",
+        theme_color: "#ffffff",
+        display: "standalone",
+        icon: "/favicon.ico", // This path is relative to the root of the site.
+        crossOrigin: `use-credentials`,
+      },
+    },
+    {
       resolve: 'gatsby-source-filesystem',
       options: {
         name: 'pages',
